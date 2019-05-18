@@ -1,0 +1,22 @@
+rinutils - A C11 / gnu11 utilities C library
+============================================
+Shlomi Fish <shlomif@cpan.org>
+:Date: 2018-10-07
+:Revision: $Id$
+
+[id="intro"]
+Introduction
+------------
+
+This is a set of C headers containing macros and static functions that
+are expected to work on https://en.wikipedia.org/wiki/Unix-like[Unix-like systems]
+and https://en.wikipedia.org/wiki/Microsoft_Windows[MS Windows] that have
+been extracted from https://www.shlomifish.org/[Shlomi Fish´s projects].
+
+They are quite random and task specific and may not work for you.
+
+[id="license"]
+License
+-------
+
+This code is licensed under the https://en.wikipedia.org/wiki/MIT_License#Variants[Expat license] .
