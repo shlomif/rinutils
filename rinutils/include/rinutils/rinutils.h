@@ -28,6 +28,7 @@
 #include "rinutils/exit_error.h"
 #include "rinutils/likely.h"
 #include "rinutils/min_and_max.h"
+#include "rinutils/portable_time.h"
 #include "rinutils/str_utils.h"
 #include "rinutils/typeof_wrap.h"
 #include "rinutils/unused.h"
