@@ -13,6 +13,7 @@
 extern "C" {
 #endif
 
+#include "rinutils/longlong.h"
 #include "rinutils/typeof_wrap.h"
 #include <stdio.h>
 
@@ -28,10 +29,6 @@ typedef struct
 #define RIN_GET_TIME(pt) gettimeofday(&((pt).tv), &((pt).tz))
 #define RIN_TIME_GET_SEC(pt) ((long long)((pt).tv.tv_sec))
 #define RIN_TIME_GET_USEC(pt) ((long long)((pt).tv.tv_usec))
-#define RIN_LL_FMT "%lld"
-#define RIN_ULL_FMT "%llu"
-#define RIN_LL6_FMT "%.6lld"
-#define RIN_LL9_FMT "%09lld"
 #else
 #include <sys/types.h>
 #include <sys/timeb.h>
@@ -44,10 +41,6 @@ typedef struct
 #define RIN_GET_TIME(pt) _ftime(&((pt).tb))
 #define RIN_TIME_GET_SEC(pt) ((long long)((pt).tb.time))
 #define RIN_TIME_GET_USEC(pt) ((long long)(((pt).tb.millitm) * 1000))
-#define RIN_LL_FMT "%I64d"
-#define RIN_ULL_FMT "%I64u"
-#define RIN_LL6_FMT "%.6I64d"
-#define RIN_LL9_FMT "%09I64d"
 #endif
 
 #define RIN_TIME__GET_BOTH(pt) RIN_TIME_GET_SEC(pt), RIN_TIME_GET_USEC(pt)
