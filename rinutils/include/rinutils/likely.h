@@ -11,5 +11,18 @@
 // and unlikely macros. See: https://lwn.net/Articles/255364/ .
 #pragma once
 
-#define unlikely(expr) __builtin_expect(!!(expr), 0)
-#define likely(expr) __builtin_expect(!!(expr), 1)
+#if !defined(likely)
+#if defined(__GNUC__) || defined(__INTEL_COMPILER) || defined(__clang__) || (defined(__IBMC__) || defined(__IBMCPP__))
+#if defined(__cplusplus)
+// https://stackoverflow.com/a/43870188/1067003
+#define likely(x)       __builtin_expect(static_cast<bool>((x)),1)
+#define unlikely(x)     __builtin_expect(static_cast<bool>((x)),0)
+#else
+#define likely(x)       __builtin_expect(!!(x),1)
+#define unlikely(x)     __builtin_expect(!!(x),0)
+#endif
+#else
+#define likely(x) (x)
+#define unlikely(x) (x)
+#endif
+#endif
