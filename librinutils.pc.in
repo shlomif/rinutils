@@ -1,0 +1,12 @@
+prefix="@CMAKE_INSTALL_PREFIX@"
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name:  rinutils
+Description: Ad hoc headers library for C
+Version: @VERSION@
+URL: https://github.com/shlomif/rinutils
+Libs:
+Libs.private: -lm
+Cflags: -I${includedir}

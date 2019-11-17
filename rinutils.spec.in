@@ -1,0 +1,77 @@
+%define debug_package %{nil}
+Name: rinutils
+Version: @VERSION@
+Release: 1
+License: MIT
+Group: Development/C
+Source: rinutils-%{version}.tar.xz
+URL: https://github.com/shlomif/rinutils/
+Requires: librinutils-devel
+Summary: Header library.
+BuildRequires: cmake
+BuildRequires: perl(Carp)
+BuildRequires: perl(Cwd)
+BuildRequires: perl(Data::Dumper)
+BuildRequires: perl(Env::Path)
+BuildRequires: perl(File::Path)
+BuildRequires: perl(File::Spec)
+BuildRequires: perl(Inline)
+BuildRequires: perl(Inline::C)
+BuildRequires: perl(List::MoreUtils)
+BuildRequires: perl(Path::Tiny)
+BuildRequires: perl(Test::Differences)
+BuildRequires: perl(Test::More)
+BuildRequires: perl(Test::RunValgrind)
+BuildRequires: perl(base)
+BuildRequires: perl(lib)
+BuildRequires: perl(strict)
+BuildRequires: perl(warnings)
+BuildRequires: perl-devel
+BuildRequires: python3
+BuildRequires: valgrind
+
+%description
+This is a solver, written in C, to solve the Solitaire variant called “Black
+Hole” and the one called “All in a Row”. It provides a portable C library, and
+a command line application that after being fed with a layout will emit the
+cards to move.
+
+%package -n librinutils-devel
+Summary: Header library.
+Group: Development/C
+
+%description -n librinutils-devel
+Freecell Solver is a library for automatically solving boards of Freecell and
+similar variants of card Solitaire. This package contains the header files and
+static libraries necessary for developing programs using Freecell Solver.
+
+You should install it if you are a game developer who would like to use
+Freecell Solver from within your programs.
+
+%prep
+%setup
+
+%build
+%cmake -DLOCALE_INSTALL_DIR=%{_datadir}/locale -DLIB_INSTALL_DIR=%{_libdir}
+%make_build
+
+%install
+rm -rf %buildroot
+%make_install -C build
+
+%files
+%defattr(-,root,root)
+%doc README.asciidoc NEWS.asciidoc
+
+%files -n librinutils-devel
+%defattr(-,root,root)
+/usr/include/rinutils/*.h
+%{_libdir}/pkgconfig/*.pc
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%changelog
+* Tue Mar 31 2009 Shlomi Fish <shlomif@cpan.org> 2.21.2-1
+- Adapted to the CMake build system.
+- Changed the license from "Public Domain" to "MIT".
