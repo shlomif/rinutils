@@ -126,3 +126,18 @@ ADD_CUSTOM_COMMAND(
     COMMAND "touch"
     ARGS "config.h.in"
 )
+
+set(INCLUDE_INSTALL_DIR include)
+set(LIB_INSTALL_DIR "lib/${LIB_SUFFIX}")
+include(CMakePackageConfigHelpers)
+configure_package_config_file(RinutilsConfig.cmake.in
+  ${CMAKE_CURRENT_BINARY_DIR}/RinutilsConfig.cmake
+  INSTALL_DESTINATION ${LIB_INSTALL_DIR}/Rinutils/cmake
+  PATH_VARS INCLUDE_INSTALL_DIR)
+write_basic_package_version_file(
+  ${CMAKE_CURRENT_BINARY_DIR}/RinutilsConfigVersion.cmake
+  VERSION 1.2.3
+  COMPATIBILITY SameMajorVersion )
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/RinutilsConfig.cmake
+              ${CMAKE_CURRENT_BINARY_DIR}/RinutilsConfigVersion.cmake
+        DESTINATION ${LIB_INSTALL_DIR}/Rinutils/cmake )

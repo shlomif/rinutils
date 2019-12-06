@@ -1,0 +1,8 @@
+set(RINUTILS_VERSION x.y.z)
+
+@PACKAGE_INIT@
+
+set_and_check(RINUTILS_INCLUDE_DIR "@PACKAGE_INCLUDE_INSTALL_DIR@")
+set_and_check(RINUTILS_SYSCONFIG_DIR "@PACKAGE_SYSCONFIG_INSTALL_DIR@")
+
+check_required_components(Rinutils)
