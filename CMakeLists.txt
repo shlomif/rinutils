@@ -128,7 +128,7 @@ ADD_CUSTOM_COMMAND(
 )
 
 set(INCLUDE_INSTALL_DIR include)
-set(LIB_INSTALL_DIR "lib/${LIB_SUFFIX}")
+set(LIB_INSTALL_DIR "lib${LIB_SUFFIX}")
 include(CMakePackageConfigHelpers)
 configure_package_config_file(RinutilsConfig.cmake.in
   ${CMAKE_CURRENT_BINARY_DIR}/RinutilsConfig.cmake

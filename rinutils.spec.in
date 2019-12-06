@@ -58,6 +58,7 @@ rm -rf %buildroot
 %files -n librinutils-devel
 %defattr(-,root,root)
 /usr/include/rinutils/*.h
+%{_libdir}/Rinutils/cmake/*.cmake
 %{_libdir}/pkgconfig/*.pc
 
 %clean
