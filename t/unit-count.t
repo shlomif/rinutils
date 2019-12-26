@@ -17,13 +17,20 @@ int test_count() {
     return COUNT(myarr);
 }
 
+int test_last() {
+    int mymyarr[7]={0,1,2,3,4,5,606};
+    return LAST(mymyarr);
+}
 EOF
 );
 
 package main;
 
-use Test::More tests => 1;
+use Test::More tests => 2;
 use Test::Differences (qw( eq_or_diff ));
 
 # TEST
 eq_or_diff( scalar( Rinutils::Count::test_count() ), 24, "COUNT() works" );
+
+# TEST
+eq_or_diff( scalar( Rinutils::Count::test_last() ), 606, "LAST() works" );
