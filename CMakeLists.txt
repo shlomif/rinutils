@@ -5,7 +5,7 @@ INCLUDE ("${CMAKE_SOURCE_DIR}/cmake/shlomif_common_bootstrap.cmake")
 SHLOMIF_COMMON_SETUP("${private_mod_path}")
 
 CMAKE_POLICY(SET CMP0054 NEW)
-option (FCS_WITH_TEST_SUITE "Also build and run the test suite." ON)
+option (WITH_TEST_SUITE "Also build and run the test suite." ON)
 option (DISABLE_APPLYING_RPATH "Disable applying rpath")
 
 INCLUDE(FindPkgConfig)
@@ -93,6 +93,7 @@ INSTALL(
         "rinutils/include/rinutils/longlong.h"
         "rinutils/include/rinutils/min_and_max.h"
         "rinutils/include/rinutils/portable_time.h"
+        "rinutils/include/rinutils/rin_cmocka.h"
         "rinutils/include/rinutils/rinutils.h"
         "rinutils/include/rinutils/str_utils.h"
         "rinutils/include/rinutils/typeof_wrap.h"
@@ -142,11 +143,30 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/RinutilsConfig.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/RinutilsConfigVersion.cmake
         DESTINATION ${LIB_INSTALL_DIR}/Rinutils/cmake )
 
-include(CTest)
-ENABLE_TESTING()
-ADD_TEST(
-    NAME perl_run_tests
-    COMMAND "perl" "${CMAKE_CURRENT_SOURCE_DIR}/run-tests.pl"
-)
+IF (WITH_TEST_SUITE)
+
+    include(CTest)
+    ENABLE_TESTING()
+    FIND_PACKAGE (PkgConfig REQUIRED)
+    pkg_check_modules(CMOCKA REQUIRED cmocka)
+    include_directories (${CMOCKA_INCLUDE_DIRS})
+    link_directories (${CMOCKA_LIBRARY_DIRS})
+    add_definitions (${CMOCKA_CFLAGS_OTHER})
+    INCLUDE_DIRECTORIES (BEFORE "${CMAKE_CURRENT_SOURCE_DIR}/rinutils/include")
+    ADD_TEST(
+        NAME perl_run_tests
+        COMMAND "perl" "${CMAKE_CURRENT_SOURCE_DIR}/run-tests.pl"
+    )
+    FILE (MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/t")
+
+    SET (EXE_FILE "bit-reader-and-writer-test.t.exe")
+
+    ADD_EXECUTABLE(
+        "${EXE_FILE}"
+        "${CMAKE_CURRENT_SOURCE_DIR}/t/bit-reader-and-writer-test.c"
+    )
+    TARGET_LINK_LIBRARIES (${EXE_FILE} ${CMOCKA_LIBRARIES})
+
+ENDIF()
 
 FILE (WRITE "${CMAKE_CURRENT_BINARY_DIR}/t/TAGS.txt" "")
