@@ -6,7 +6,7 @@ use warnings;
 use FindBin qw/ $Bin /;
 use lib "$Bin/lib";
 
-package FC_Solve::StrUtils;
+package Rinutils::StrUtils;
 
 use FC_Solve::InlineWrap (
     C => <<"EOF",
@@ -28,12 +28,12 @@ use Test::Differences (qw( eq_or_diff ));
 
 sub c_string_starts_with
 {
-    return FC_Solve::StrUtils::c_string_starts_with(@_);
+    return Rinutils::StrUtils::c_string_starts_with(@_);
 }
 
 sub try_str_prefix
 {
-    return FC_Solve::StrUtils::c_try_str_prefix(@_);
+    return Rinutils::StrUtils::c_try_str_prefix(@_);
 }
 
 # TEST
