@@ -1,0 +1,32 @@
+addons:
+    apt:
+        packages:
+            - build-essential
+            - cmake
+            - cmake-data
+            - cpanminus
+            - libperl-dev
+            - ninja-build
+            - perl
+            - valgrind
+            - xz-utils
+            - zip
+cache:
+    ccache: true
+    directories:
+        - $HOME/perl_modules
+os: linux
+dist: bionic
+before_install:
+    - cpanm local::lib
+    - eval "$(perl -Mlocal::lib=$HOME/perl_modules)"
+install:
+    - which python3
+    - cpanm --notest Dir::Manifest Env::Path IO::All Inline Inline::C Perl::Tidy Test::Code::TidyAll Test::Differences Test::Pod Test::Pod::Coverage Test::RunValgrind Test::TrailingSpace Test::Trap
+perl:
+    - "5.26"
+python:
+    - "3.6"
+script:
+    - "_verbose() { export HARNESS_VERBOSE=1 ; } ; export FCS_TEST_BUILD=1; perl CI-testing/continuous-integration-testing.pl"
+sudo: false
