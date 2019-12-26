@@ -141,3 +141,12 @@ write_basic_package_version_file(
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/RinutilsConfig.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/RinutilsConfigVersion.cmake
         DESTINATION ${LIB_INSTALL_DIR}/Rinutils/cmake )
+
+include(CTest)
+ENABLE_TESTING()
+ADD_TEST(
+    NAME perl_run_tests
+    COMMAND "perl" "${CMAKE_CURRENT_SOURCE_DIR}/run-tests.pl"
+)
+
+FILE (WRITE "${CMAKE_CURRENT_BINARY_DIR}/t/TAGS.txt" "")
