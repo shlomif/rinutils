@@ -8,7 +8,7 @@ use lib "$Bin/lib";
 
 package Rinutils::MinMax;
 
-use FC_Solve::InlineWrap (
+use Rinutils::InlineWrap (
     C => <<"EOF",
 #include "rinutils/min_and_max.h"
 

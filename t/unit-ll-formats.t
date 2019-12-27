@@ -8,7 +8,7 @@ use lib "$Bin/lib";
 
 package Rinutils::LL;
 
-use FC_Solve::InlineWrap (
+use Rinutils::InlineWrap (
     C => <<"EOF",
 #include "rinutils/longlong.h"
 

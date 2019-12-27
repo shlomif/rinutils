@@ -1,4 +1,4 @@
-package FC_Solve::InlineWrap;
+package Rinutils::InlineWrap;
 
 use 5.014;
 use strict;
@@ -7,7 +7,7 @@ use warnings;
 use Config;
 use Inline;
 
-use FC_Solve::Paths qw( $IS_WIN bin_file src_file );
+use Rinutils::Paths qw( $IS_WIN bin_file src_file );
 
 sub import
 {
