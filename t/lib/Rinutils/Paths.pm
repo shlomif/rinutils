@@ -9,7 +9,7 @@ use String::ShellQuote qw/shell_quote/;
 use parent 'Exporter';
 
 our @EXPORT_OK =
-    qw($FIND_DEAL_INDEX $GEN_MULTI $IS_WIN $MAKE_PYSOL bin_board bin_exe_raw bin_file data_file dll_file exe_fn is_break is_dbm_apr is_freecell_only is_without_dbm is_without_flares is_without_patsolve is_without_valgrind normalize_lf samp_board samp_preset samp_sol src_file src_script);
+    qw($FIND_DEAL_INDEX $GEN_MULTI $IS_WIN $MAKE_PYSOL bin_board bin_exe_raw bin_file data_file dll_file exe_fn is_break is_dbm_apr is_freecell_only is_without_flares is_without_patsolve is_without_valgrind normalize_lf samp_board samp_preset samp_sol src_file src_script);
 
 use Path::Tiny qw/ path /;
 
@@ -100,29 +100,14 @@ sub is_freecell_only
     return $FC_ONLY;
 }
 
-sub is_without_dbm
-{
-    return $NO_DBM;
-}
-
 sub is_without_flares
 {
     return $NO_FLARES;
 }
 
-sub is_without_patsolve
-{
-    return $NO_PATSOLVE;
-}
-
 sub is_without_valgrind
 {
     return $NO_VALGRIND;
-}
-
-sub is_dbm_apr
-{
-    return $DBM_APR;
 }
 
 sub normalize_lf
