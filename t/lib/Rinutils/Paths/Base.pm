@@ -1,4 +1,4 @@
-package FC_Solve::Paths::Base;
+package Rinutils::Paths::Base;
 
 use 5.014;
 use strict;

@@ -9,7 +9,6 @@ use Getopt::Long qw/ GetOptions /;
 use Env::Path ();
 use Path::Tiny qw/ path /;
 use File::Basename qw/ basename /;
-use CHI ();
 
 my $glob_was_set = 0;
 my $rerun        = 0;
@@ -19,15 +18,9 @@ my $abs_bindir   = $bindir->absolute;
 # Whether to use prove instead of runprove.
 my $use_prove = $ENV{FCS_USE_TEST_RUN} ? 0 : 1;
 my $num_jobs  = $ENV{TEST_JOBS};
-my $KEY       = 'FC_SOLVE__TESTS_RERUNS_CACHE_DATA_DIR';
-my $cache     = CHI->new(
-    driver => 'File',
-    root_dir =>
-        ( $ENV{$KEY} || ( ( $ENV{TMPDIR} || '/tmp' ) . '/fc-solve1temp' ) )
-);
 require lib;
 lib->import("$abs_bindir/t/lib");
-require FC_Solve::Paths::Base;
+require Rinutils::Paths::Base;
 
 sub _is_parallized
 {
@@ -114,7 +107,7 @@ sub myglob
     Env::Path->CPATH->Prepend( $abs_bindir, );
 
     Env::Path->LD_LIBRARY_PATH->Prepend($fcs_path);
-    if ($FC_Solve::Paths::Base::IS_WIN)
+    if ($Rinutils::Paths::Base::IS_WIN)
     {
         # For the shared objects.
         Env::Path->PATH->Append($fcs_path);
@@ -134,7 +127,7 @@ sub myglob
     local $ENV{CMOCKA_MESSAGE_OUTPUT} = 'TAP';
 
     local $ENV{HARNESS_ALT_INTRP_FILE} = $get_config_fn->(
-        $FC_Solve::Paths::Base::IS_WIN
+        $Rinutils::Paths::Base::IS_WIN
         ? "alternate-interpreters--mswin.yml"
         : "alternate-interpreters.yml"
     );
@@ -149,7 +142,7 @@ sub myglob
     );
 
     my $is_ninja = ( -e "build.ninja" );
-    my $MAKE     = $FC_Solve::Paths::Base::IS_WIN ? 'gmake' : 'make';
+    my $MAKE     = $Rinutils::Paths::Base::IS_WIN ? 'gmake' : 'make';
 
     if ( !$is_ninja )
     {
