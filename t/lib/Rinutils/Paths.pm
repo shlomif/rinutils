@@ -8,8 +8,7 @@ use String::ShellQuote qw/shell_quote/;
 
 use parent 'Exporter';
 
-our @EXPORT_OK =
-    qw($FIND_DEAL_INDEX $GEN_MULTI $IS_WIN $MAKE_PYSOL bin_board bin_exe_raw bin_file data_file dll_file exe_fn is_break is_dbm_apr is_freecell_only is_without_flares is_without_patsolve is_without_valgrind normalize_lf samp_board samp_preset samp_sol src_file src_script);
+our @EXPORT_OK = qw($IS_WIN bin_file src_file);
 
 use Path::Tiny qw/ path /;
 
@@ -35,23 +34,14 @@ sub _correct_path
     }
     return $p;
 }
-my $EXE_SUF            = ( $IS_WIN ? '.exe' : '' );
-my $FCS_PATH           = path( $ENV{FCS_PATH} );
-my $PY3 = ( $IS_WIN ? 'python3 ' : '' );
+my $EXE_SUF  = ( $IS_WIN ? '.exe' : '' );
+my $FCS_PATH = path( $ENV{FCS_PATH} );
+my $PY3      = ( $IS_WIN ? 'python3 ' : '' );
 
 sub exe_fn
 {
     return shift . $EXE_SUF;
 }
-
-sub _board_gen
-{
-    return "${PY3}../board_gen/" . shift;
-
-}
-our $MAKE_PYSOL      = _board_gen('make_pysol_freecell_board.py');
-our $FIND_DEAL_INDEX = _board_gen('find-freecell-deal-index.py');
-our $GEN_MULTI       = _board_gen('gen-multiple-pysol-layouts');
 
 sub _is_tag
 {
