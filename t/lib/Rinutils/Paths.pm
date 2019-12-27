@@ -9,7 +9,7 @@ use String::ShellQuote qw/shell_quote/;
 use parent 'Exporter';
 
 our @EXPORT_OK =
-    qw($FC_SOLVE_EXE $FC_SOLVE__RAW $FIND_DEAL_INDEX $GEN_MULTI $IS_WIN $MAKE_PYSOL bin_board bin_exe_raw bin_file data_file dll_file exe_fn is_break is_dbm_apr is_freecell_only is_without_dbm is_without_flares is_without_patsolve is_without_valgrind normalize_lf samp_board samp_preset samp_sol src_file src_script);
+    qw($FIND_DEAL_INDEX $GEN_MULTI $IS_WIN $MAKE_PYSOL bin_board bin_exe_raw bin_file data_file dll_file exe_fn is_break is_dbm_apr is_freecell_only is_without_dbm is_without_flares is_without_patsolve is_without_valgrind normalize_lf samp_board samp_preset samp_sol src_file src_script);
 
 use Path::Tiny qw/ path /;
 
@@ -24,10 +24,6 @@ sub src_script
 {
     return src_file( [ 'scripts', shift ] );
 }
-my $DATA_DIR    = src_file( [qw(t data)] );
-my $BOARDS_DIR  = $DATA_DIR->child('sample-boards');
-my $SOLS_DIR    = $DATA_DIR->child('sample-solutions');
-my $PRESETS_DIR = $DATA_DIR->child('presets');
 our $IS_WIN = ( $^O eq "MSWin32" );
 
 sub _correct_path
@@ -41,9 +37,6 @@ sub _correct_path
 }
 my $EXE_SUF            = ( $IS_WIN ? '.exe' : '' );
 my $FCS_PATH           = path( $ENV{FCS_PATH} );
-my $FC_SOLVE__RAW__RAW = "$FCS_PATH/fc-solve";
-our $FC_SOLVE__RAW = _correct_path($FC_SOLVE__RAW__RAW) . $EXE_SUF;
-our $FC_SOLVE_EXE  = _correct_path( shell_quote($FC_SOLVE__RAW__RAW) );
 my $PY3 = ( $IS_WIN ? 'python3 ' : '' );
 
 sub exe_fn
@@ -97,11 +90,6 @@ sub bin_board
     return $FCS_PATH->child(shift);
 }
 
-sub data_file
-{
-    return $DATA_DIR->child( @{ shift @_ } );
-}
-
 sub is_break
 {
     return $BREAK_TAG;
@@ -135,22 +123,6 @@ sub is_without_valgrind
 sub is_dbm_apr
 {
     return $DBM_APR;
-}
-
-# Returns a board from the sample-boards directory.
-sub samp_board
-{
-    return $BOARDS_DIR->child(shift);
-}
-
-sub samp_sol
-{
-    return $SOLS_DIR->child(shift);
-}
-
-sub samp_preset
-{
-    return $PRESETS_DIR->child(shift);
 }
 
 sub normalize_lf
