@@ -1,0 +1,13 @@
+[PerlTidy]
+select = **/*.{pl,pm,t}
+argv = -ci=4 -bl -cti=0
+ignore =
+
+[PerlCritic]
+; select = **/*.{pl,pm,t}
+; ignore = **/*
+select = **/*.{pl,pm,t}
+ignore = t/lib/Rinutils/InlineWrap.pm
+
+[TestCount]
+select = **/*.t
