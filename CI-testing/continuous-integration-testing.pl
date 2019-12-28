@@ -5,14 +5,14 @@ use strict;
 use warnings;
 use autodie;
 
-use Getopt::Long qw/GetOptions/;
+use Getopt::Long qw/ GetOptions /;
 
 sub do_system
 {
     my ($args) = @_;
 
     my $cmd = $args->{cmd};
-    print "Running [@$cmd]";
+    print "Running [@$cmd]\n";
     if ( system(@$cmd) )
     {
         die "Running [@$cmd] failed!";
