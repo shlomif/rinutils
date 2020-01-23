@@ -5,6 +5,7 @@ addons:
             - cmake
             - cmake-data
             - cpanminus
+            - libcmocka-dev
             - libperl-dev
             - ninja-build
             - perl
