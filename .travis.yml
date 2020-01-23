@@ -23,7 +23,7 @@ before_install:
     - eval "$(perl -Mlocal::lib=$HOME/perl_modules)"
 install:
     - which python3
-    - cpanm --notest Dir::Manifest Env::Path IO::All Inline Inline::C Perl::Tidy Test::Code::TidyAll Test::Differences Test::Pod Test::Pod::Coverage Test::RunValgrind Test::TrailingSpace Test::Trap
+    - cpanm --notest Code::TidyAll::Plugin::TestCount Dir::Manifest Env::Path IO::All Inline Inline::C Perl::Tidy Test::Code::TidyAll Test::Differences Test::Pod Test::Pod::Coverage Test::RunValgrind Test::TrailingSpace Test::Trap
 perl:
     - "5.30"
 python:
