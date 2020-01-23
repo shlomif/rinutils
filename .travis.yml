@@ -24,7 +24,7 @@ install:
     - which python3
     - cpanm --notest Dir::Manifest Env::Path IO::All Inline Inline::C Perl::Tidy Test::Code::TidyAll Test::Differences Test::Pod Test::Pod::Coverage Test::RunValgrind Test::TrailingSpace Test::Trap
 perl:
-    - "5.26"
+    - "5.30"
 python:
     - "3.6"
 script:
