@@ -29,5 +29,5 @@ perl:
 python:
     - "3.6"
 script:
-    - "_verbose() { export HARNESS_VERBOSE=1 ; } ; export FCS_TEST_BUILD=1; perl CI-testing/continuous-integration-testing.pl"
+    - "_verbose() { export HARNESS_VERBOSE=1 ; } ; export FCS_TEST_BUILD=1 RINUTILS_TEST_TIDY=1 RINUTILS_TEST_BUILD=1 ; perl CI-testing/continuous-integration-testing.pl"
 sudo: false
