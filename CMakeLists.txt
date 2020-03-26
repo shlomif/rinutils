@@ -9,6 +9,7 @@ option (WITH_TEST_SUITE "Also build and run the test suite." ON)
 option (DISABLE_APPLYING_RPATH "Disable applying rpath")
 
 INCLUDE(FindPkgConfig)
+INCLUDE(GNUInstallDirs)
 
 # Introduces VERSION , CPACK_PACKAGE_VERSION_MAJOR,
 # CPACK_PACKAGE_VERSION_MAJOR, and CPACK_PACKAGE_VERSION_PATCH
@@ -54,7 +55,7 @@ IF (NOT DISABLE_APPLYING_RPATH)
     SET(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
 
     # the RPATH to be used when installing
-    SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}")
+    SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_LIBDIR}")
 
     # add the automatically determined parts of the RPATH
     # which point to directories outside the build tree to the install RPATH
@@ -99,14 +100,14 @@ INSTALL(
         "rinutils/include/rinutils/typeof_wrap.h"
         "rinutils/include/rinutils/unused.h"
     DESTINATION
-        "include/rinutils"
+        "${CMAKE_INSTALL_INCLUDEDIR}/rinutils"
 )
 
 INSTALL(
     FILES
         "${CMAKE_CURRENT_BINARY_DIR}/lib${CPACK_PACKAGE_NAME}.pc"
     DESTINATION
-        "lib${LIB_SUFFIX}/pkgconfig"
+        "${CMAKE_INSTALL_LIBDIR}/pkgconfig"
 )
 
 CONFIGURE_FILE(
@@ -128,20 +129,18 @@ ADD_CUSTOM_COMMAND(
     ARGS "config.h.in"
 )
 
-set(INCLUDE_INSTALL_DIR include)
-set(LIB_INSTALL_DIR "lib${LIB_SUFFIX}")
 include(CMakePackageConfigHelpers)
 configure_package_config_file(RinutilsConfig.cmake.in
   ${CMAKE_CURRENT_BINARY_DIR}/RinutilsConfig.cmake
-  INSTALL_DESTINATION ${LIB_INSTALL_DIR}/Rinutils/cmake
-  PATH_VARS INCLUDE_INSTALL_DIR)
+  INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/Rinutils
+  PATH_VARS CMAKE_INSTALL_INCLUDEDIR)
 write_basic_package_version_file(
   ${CMAKE_CURRENT_BINARY_DIR}/RinutilsConfigVersion.cmake
   VERSION 1.2.3
   COMPATIBILITY SameMajorVersion )
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/RinutilsConfig.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/RinutilsConfigVersion.cmake
-        DESTINATION ${LIB_INSTALL_DIR}/Rinutils/cmake )
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/Rinutils )
 
 IF (WITH_TEST_SUITE)
 
