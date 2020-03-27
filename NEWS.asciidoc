@@ -4,6 +4,13 @@ Shlomi Fish <shlomif@cpan.org>
 :Date: 2019-11-17
 :Revision: $Id$
 
+0.4.0       ( 27 Mar 2020 )
+----------------------------
+
+* Convert the cmake build sys to +INCLUDE(GNUInstallDirs)+ - thanks to asturm.
+
+* Add Travis-CI testing.
+
 0.2.0       ( 17 Nov 2019 )
 ----------------------------
 
