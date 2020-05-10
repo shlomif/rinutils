@@ -73,13 +73,9 @@ GetOptions(
 ) or die "Wrong opts - $!";
 my %binaries;
 
-use Digest::SHA ();
 if (1)
 {
     ++$rerun;
-}
-else
-{
 }
 $glob_was_set ||= $exclude_re_s;
 
