@@ -23,4 +23,4 @@ are not supported.
 License
 -------
 
-This code is licensed under the https://en.wikipedia.org/wiki/MIT_License#Variants[Expat license] .
+This code is licensed under the https://en.wikipedia.org/wiki/MIT_License#Variants[MIT/Expat license] .

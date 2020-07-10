@@ -14,7 +14,7 @@ extern "C" {
 
 #include <stdlib.h>
 
-/* Short for size-realloc. */
+// Short for size-realloc.
 #define SREALLOC(arr, count) (realloc(arr, sizeof(arr[0]) * (count)))
 #define SMALLOC(arr, count) (malloc(sizeof(arr[0]) * (count)))
 #define SMALLOC1(ptr) SMALLOC(ptr, 1)
