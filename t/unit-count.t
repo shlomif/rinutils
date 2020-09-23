@@ -6,8 +6,6 @@ use warnings;
 use FindBin qw/ $Bin /;
 use lib "$Bin/lib";
 
-package Rinutils::Count;
-
 use Rinutils::InlineWrap (
     C => <<"EOF",
 #include "rinutils/count.h"
@@ -24,13 +22,11 @@ int test_last() {
 EOF
 );
 
-package main;
-
 use Test::More tests => 2;
 use Test::Differences (qw( eq_or_diff ));
 
 # TEST
-eq_or_diff( scalar( Rinutils::Count::test_count() ), 24, "COUNT() works" );
+eq_or_diff( scalar( test_count() ), 24, "COUNT() works" );
 
 # TEST
-eq_or_diff( scalar( Rinutils::Count::test_last() ), 606, "LAST() works" );
+eq_or_diff( scalar( test_last() ), 606, "LAST() works" );

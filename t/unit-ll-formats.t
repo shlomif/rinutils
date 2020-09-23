@@ -6,8 +6,6 @@ use warnings;
 use FindBin qw/ $Bin /;
 use lib "$Bin/lib";
 
-package Rinutils::LL;
-
 use Rinutils::InlineWrap (
     C => <<"EOF",
 #include "rinutils/longlong.h"
@@ -21,10 +19,8 @@ SV * format_ll( long inp) {
 EOF
 );
 
-package main;
-
 use Test::More tests => 1;
 use Test::Differences (qw( eq_or_diff ));
 
 # TEST
-eq_or_diff( Rinutils::LL::format_ll(240), "i = 240", "RIN_LL_FMT works" );
+eq_or_diff( format_ll(240), "i = 240", "RIN_LL_FMT works" );
