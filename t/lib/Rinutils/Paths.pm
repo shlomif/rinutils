@@ -7,8 +7,8 @@ use Socket qw(:crlf);
 use String::ShellQuote qw/shell_quote/;
 
 use parent 'Exporter';
-
-our @EXPORT_OK = qw($IS_WIN bin_file src_file);
+use Rinutils::Paths::Base qw/ is_win /;
+our @EXPORT_OK = qw(bin_file src_file);
 
 use Path::Tiny qw/ path /;
 
@@ -23,25 +23,11 @@ sub src_script
 {
     return src_file( [ 'scripts', shift ] );
 }
-our $IS_WIN = ( $^O eq "MSWin32" );
+my $IS_WIN = is_win();
 
-sub _correct_path
-{
-    my $p = shift;
-    if ($IS_WIN)
-    {
-        $p =~ tr#/#\\#;
-    }
-    return $p;
-}
 my $EXE_SUF  = ( $IS_WIN ? '.exe' : '' );
 my $FCS_PATH = path( $ENV{FCS_PATH} );
 my $PY3      = ( $IS_WIN ? 'python3 ' : '' );
-
-sub exe_fn
-{
-    return shift . $EXE_SUF;
-}
 
 sub _is_tag
 {

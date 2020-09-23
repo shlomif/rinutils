@@ -21,8 +21,7 @@ my $num_jobs  = $ENV{TEST_JOBS};
 require lib;
 lib->import("$abs_bindir/t/lib");
 require Rinutils::Paths::Base;
-use vars qw/ $IS_WIN /;
-Rinutils::Paths::Base->import("\$IS_WIN");
+Rinutils::Paths::Base->import("is_win");
 
 sub _is_parallized
 {
@@ -105,7 +104,7 @@ sub myglob
     Env::Path->CPATH->Prepend( $abs_bindir, );
 
     Env::Path->LD_LIBRARY_PATH->Prepend($fcs_path);
-    if ($IS_WIN)
+    if ( is_win() )
     {
         # For the shared objects.
         Env::Path->PATH->Append($fcs_path);
@@ -125,7 +124,7 @@ sub myglob
     local $ENV{CMOCKA_MESSAGE_OUTPUT} = 'TAP';
 
     local $ENV{HARNESS_ALT_INTRP_FILE} = $get_config_fn->(
-        $IS_WIN
+        is_win()
         ? "alternate-interpreters--mswin.yml"
         : "alternate-interpreters.yml"
     );
@@ -140,7 +139,7 @@ sub myglob
     );
 
     my $is_ninja = ( -e "build.ninja" );
-    my $MAKE     = $IS_WIN ? 'gmake' : 'make';
+    my $MAKE     = is_win() ? 'gmake' : 'make';
 
     if ( !$is_ninja )
     {

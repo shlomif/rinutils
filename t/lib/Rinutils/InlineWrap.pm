@@ -7,7 +7,8 @@ use warnings;
 use Config;
 use Inline;
 
-use Rinutils::Paths qw( $IS_WIN bin_file src_file );
+use Rinutils::Paths::Base qw( is_win );
+use Rinutils::Paths qw( bin_file src_file );
 
 sub import
 {
@@ -19,10 +20,10 @@ sub import
     my $libs = delete( $args{l} ) // '';
 
     my @workaround_for_a_heisenbug =
-        ( $IS_WIN ? ( optimize => '-g' ) : () );
+        ( is_win() ? ( optimize => '-g' ) : () );
 
     my $ccflags = "$Config{ccflags} -std=gnu99";
-    if ($IS_WIN)
+    if ( is_win() )
     {
         $ccflags =~ s#(^|\s)-[Of][a-zA-Z0-9_\-]*#$1#gms;
     }
@@ -44,7 +45,7 @@ sub import
 
 =begin debug
 
-    if ($IS_WIN)
+    if (is_win())
     {
         require Data::Dumper;
         print STDERR "inline_params = <<<<<\n", Data::Dumper::Dumper( \@inline_params ),
