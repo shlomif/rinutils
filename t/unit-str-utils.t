@@ -6,7 +6,8 @@ use warnings;
 use FindBin qw/ $Bin /;
 use lib "$Bin/lib";
 
-package Rinutils::StrUtils;
+use Test::More tests => 5;
+use Test::Differences (qw( eq_or_diff ));
 
 use Rinutils::InlineWrap (
     C => <<"EOF",
@@ -21,21 +22,6 @@ char *c_try_str_prefix(char * str, char * prefix) {
 EOF
 );
 
-package main;
-
-use Test::More tests => 5;
-use Test::Differences (qw( eq_or_diff ));
-
-sub c_string_starts_with
-{
-    return Rinutils::StrUtils::c_string_starts_with(@_);
-}
-
-sub try_str_prefix
-{
-    return Rinutils::StrUtils::c_try_str_prefix(@_);
-}
-
 # TEST
 ok( scalar( c_string_starts_with( "Hello", "Hel", 3 ) ),
     "string_starts_with 1" );
@@ -49,9 +35,9 @@ ok( scalar( !c_string_starts_with( "Hello", "Hew", 3 ) ),
     "string_starts_with wrong prefix." );
 
 # TEST
-eq_or_diff( try_str_prefix( "PrefixSuffix", "Prefix" ),
+eq_or_diff( c_try_str_prefix( "PrefixSuffix", "Prefix" ),
     "Suffix", "try_str_prefix success." );
 
 # TEST
-ok( !defined( try_str_prefix( "PrefixSuffix", "not" ) ),
+ok( !defined( c_try_str_prefix( "PrefixSuffix", "not" ) ),
     "try_str_prefix failure." );
