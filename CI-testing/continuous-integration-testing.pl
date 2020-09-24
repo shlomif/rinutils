@@ -44,7 +44,7 @@ if ($IS_WIN)
 do_system(
     {
         cmd => [
-                  "cd . && mkdir B && cd B && cmake .. "
+                  "cd . && mkdir B && cd B && cmake -DWITH_TEST_SUITE=ON .. "
                 . ( defined($cmake_gen) ? qq#-G "$cmake_gen"# : "" )
                 . " && $MAKE && $^X ..${SEP}run-tests.pl"
         ]

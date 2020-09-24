@@ -4,6 +4,14 @@ Shlomi Fish <shlomif@cpan.org>
 :Date: 2019-11-17
 :Revision: $Id$
 
+0.6.0       ( 24 Sep 2020 )
+----------------------------
+
+* Made the WITH_TEST_SUITE option off by default to avoid depending on cmocka
+( https://github.com/shlomif/fortune-mod/issues/44 )
+
+* Remove unused code and other cleanups.
+
 0.4.1       ( 20 Jul 2020 )
 ----------------------------
 

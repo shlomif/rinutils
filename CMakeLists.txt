@@ -5,7 +5,7 @@ INCLUDE ("${CMAKE_SOURCE_DIR}/cmake/shlomif_common_bootstrap.cmake")
 SHLOMIF_COMMON_SETUP("${private_mod_path}")
 
 CMAKE_POLICY(SET CMP0054 NEW)
-option (WITH_TEST_SUITE "Also build and run the test suite." ON)
+option (WITH_TEST_SUITE "Also build and run the test suite.")
 option (DISABLE_APPLYING_RPATH "Disable applying rpath")
 
 INCLUDE(FindPkgConfig)
