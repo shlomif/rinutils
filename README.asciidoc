@@ -21,7 +21,7 @@ They include:
 
 3. +DLLEXPORT+ symbols-modifiers.
 
-4. +likely()+ and +unlikely()+.
+4. +likely()+ and +unlikely()+ CPU branch-prediction hints (see https://stackoverflow.com/questions/109710[Stack Overflow question]).
 
 5. +long long+ sprintf()-formats
 
