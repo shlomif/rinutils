@@ -27,7 +27,15 @@ They include:
 
 6. +min()+ and +max()+
 
-7. +rinutils/rin_cmocka.h+ For reducing https://cmocka.org/[cmocka’s] boilerplate.
+7. +rinutils/portable_time.h+ for cross-platform time querying.
+
+8. Some string utilities as inline functions.
+
+9. +typeof_wrap.h+ for https://en.cppreference.com/w/cpp/language/auto[C++-"auto"]-like macros.
+
+10. +GCC_UNUSED+ for silencing warnings.
+
+11. +rinutils/rin_cmocka.h+ for reducing https://cmocka.org/[cmocka’s] boilerplate.
 
 **Note:** we only support the https://gcc.gnu.org/onlinedocs/gcc/Standards.html[`-std=gnu11`]
 dialect as supported by https://en.wikipedia.org/wiki/GNU_Compiler_Collection[GCC],
