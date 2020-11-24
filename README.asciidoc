@@ -13,7 +13,21 @@ are expected to work on https://en.wikipedia.org/wiki/Unix-like[Unix-like system
 and https://en.wikipedia.org/wiki/Microsoft_Windows[MS Windows] that have
 been extracted from https://www.shlomifish.org/[Shlomi Fish´s projects].
 
-They are quite random and task specific and may not work for you.
+They include:
+
+1. sizeof-aware wrappers for https://en.cppreference.com/w/c/memory/malloc[malloc()/realloc()]
+
+2. +COUNT()+ and +LAST()+ macros.
+
+3. +DLLEXPORT+ symbols-modifiers.
+
+4. +likely()+ and +unlikely()+.
+
+5. +long long+ sprintf()-formats
+
+6. +min()+ and +max()+
+
+7. +rinutils/rin_cmocka.h+ For reducing https://cmocka.org/[cmocka’s] boilerplate.
 
 **Note:** we only support the https://gcc.gnu.org/onlinedocs/gcc/Standards.html[`-std=gnu11`]
 dialect as supported by https://en.wikipedia.org/wiki/GNU_Compiler_Collection[GCC],
