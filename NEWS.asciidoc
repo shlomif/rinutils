@@ -4,6 +4,12 @@ Shlomi Fish <shlomif@cpan.org>
 :Date: 2019-11-17
 :Revision: $Id$
 
+0.8.0       ( 30 Nov 2020 )
+----------------------------
+
+* Enhance and expand the README.
+** https://lists.debian.org/debian-devel-games/2020/03/msg00008.html .
+
 0.6.0       ( 24 Sep 2020 )
 ----------------------------
 
