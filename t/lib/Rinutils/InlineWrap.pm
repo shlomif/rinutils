@@ -56,7 +56,9 @@ sub import
 
 =cut
 
+    ## no critic
     eval "{ package $pkg; Inline->bind(\@inline_params); }";
+    ## use critic
 
     if ($@)
     {
