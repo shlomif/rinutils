@@ -86,8 +86,9 @@ sub myglob
 }
 
 {
-    my $fcs_path = Path::Tiny->cwd;
-    local $ENV{FCS_PATH}                = $fcs_path;
+    my $fcs_bin_path = Path::Tiny->cwd;
+    local $ENV{FCS_PATH}                = $fcs_bin_path;
+    local $ENV{FCS_BIN_PATH}            = $fcs_bin_path;
     local $ENV{FCS_SRC_PATH}            = $abs_bindir;
     local $ENV{PYTHONDONTWRITEBYTECODE} = '1';
 
@@ -103,11 +104,11 @@ sub myglob
 
     Env::Path->CPATH->Prepend( $abs_bindir, );
 
-    Env::Path->LD_LIBRARY_PATH->Prepend($fcs_path);
+    Env::Path->LD_LIBRARY_PATH->Prepend($fcs_bin_path);
     if ( is_win() )
     {
         # For the shared objects.
-        Env::Path->PATH->Append($fcs_path);
+        Env::Path->PATH->Append($fcs_bin_path);
     }
 
     my $foo_lib_dir = $abs_bindir->child( "t", "lib" );
@@ -160,7 +161,7 @@ sub myglob
         myglob('t'),
         myglob('.'),
         (
-              ( $fcs_path ne $abs_bindir )
+              ( $fcs_bin_path ne $abs_bindir )
             ? ( myglob("$abs_bindir/t") )
             : ()
         ),
@@ -188,7 +189,7 @@ sub myglob
     }
 
     print STDERR <<"EOF";
-FCS_PATH = $ENV{FCS_PATH}
+FCS_BIN_PATH = $ENV{FCS_BIN_PATH}
 FCS_SRC_PATH = $ENV{FCS_SRC_PATH}
 FCS_TEST_TAGS = <$ENV{FCS_TEST_TAGS}>
 EOF

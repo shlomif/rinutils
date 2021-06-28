@@ -16,12 +16,12 @@ sub src_file
     return $FCS_SRC_PATH->child( @{ shift @_ } );
 }
 
-my $FCS_PATH = path( $ENV{FCS_PATH} );
+my $FCS_BIN_PATH = path( $ENV{FCS_BIN_PATH} );
 
 # A file in the output/binaries directory where fc-solve was compiled.
 sub bin_file
 {
-    return $FCS_PATH->child( @{ shift @_ } );
+    return $FCS_BIN_PATH->child( @{ shift @_ } );
 }
 
 1;
