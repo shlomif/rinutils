@@ -15,27 +15,27 @@ been extracted from https://www.shlomifish.org/[Shlomi Fish´s projects].
 
 They include:
 
-1. sizeof-aware wrappers for https://en.cppreference.com/w/c/memory/malloc[malloc()/realloc()]
+. sizeof-aware wrappers for https://en.cppreference.com/w/c/memory/malloc[malloc()/realloc()]
 
-2. +COUNT()+ and +LAST()+ macros.
+. +COUNT()+ and +LAST()+ macros.
 
-3. +DLLEXPORT+ symbols-modifiers.
+. +DLLEXPORT+ symbols-modifiers.
 
-4. +likely()+ and +unlikely()+ CPU branch-prediction hints (see https://stackoverflow.com/questions/109710[Stack Overflow question]).
+. +likely()+ and +unlikely()+ CPU branch-prediction hints (see https://stackoverflow.com/questions/109710[Stack Overflow question]).
 
-5. +long long+ sprintf()-formats
+. +long long+ sprintf()-formats
 
-6. +min()+ and +max()+
+. +min()+ and +max()+
 
-7. +rinutils/portable_time.h+ for cross-platform time querying.
+. +rinutils/portable_time.h+ for cross-platform time querying.
 
-8. Some string utilities as inline functions.
+. Some string utilities as inline functions.
 
-9. +typeof_wrap.h+ for https://en.cppreference.com/w/cpp/language/auto[C++-"auto"]-like macros.
+. +typeof_wrap.h+ for https://en.cppreference.com/w/cpp/language/auto[C++-"auto"]-like macros.
 
-10. +GCC_UNUSED+ for silencing warnings.
+. +GCC_UNUSED+ for silencing warnings.
 
-11. +rinutils/rin_cmocka.h+ for reducing https://cmocka.org/[cmocka’s] boilerplate.
+. +rinutils/rin_cmocka.h+ for reducing https://cmocka.org/[cmocka’s] boilerplate.
 
 **Note:** we only support the https://gcc.gnu.org/onlinedocs/gcc/Standards.html[`-std=gnu11`]
 dialect as supported by https://en.wikipedia.org/wiki/GNU_Compiler_Collection[GCC],
