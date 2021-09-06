@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // This file is part of rinutils. It is subject to the license terms in
 // the LICENSE file found in the top-level directory of this distribution
 // and at https://github.com/shlomif/rinutils/ . No part of
