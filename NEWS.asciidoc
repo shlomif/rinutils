@@ -7,7 +7,9 @@ Shlomi Fish <shlomif@cpan.org>
 0.10.0       ( 06 Sep 2021 )
 ----------------------------
 
-* Fix the filenames in +**.h+ and add SPDX identifiers.
+* Fix the filenames in the comments of +**.h+ and add SPDX identifiers.
+* Add -DINSTALL_TO_DATADIR=... in CMakeLists.txt "Install libdir files to the architecture independent datadir (e.g for Debian)"
+* Minor README.asciidoc reformatting.
 * Thanks to pert from +#debian-mentoring+ .
 
 0.8.0       ( 30 Nov 2020 )

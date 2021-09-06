@@ -7,6 +7,7 @@ SHLOMIF_COMMON_SETUP("${private_mod_path}")
 CMAKE_POLICY(SET CMP0054 NEW)
 option (WITH_TEST_SUITE "Also build and run the test suite.")
 option (DISABLE_APPLYING_RPATH "Disable applying rpath")
+option (INSTALL_TO_DATADIR "Install libdir files to the architecture independent datadir (e.g for Debian)")
 
 INCLUDE(FindPkgConfig)
 INCLUDE(GNUInstallDirs)
@@ -61,6 +62,7 @@ IF (NOT DISABLE_APPLYING_RPATH)
     # which point to directories outside the build tree to the install RPATH
     SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 ENDIF ()
+
 SET (LIB_BASE "rinutils")
 
 INCLUDE(CPack)
@@ -68,6 +70,12 @@ INCLUDE(CPack)
 SHLOMIF_ADD_COMMON_C_FLAGS()
 
 SHLOMIF_FINALIZE_FLAGS()
+
+IF (INSTALL_TO_DATADIR)
+    SET(RINUTILS_INSTALL_MYLIBDIR "${CMAKE_INSTALL_DATADIR}")
+ELSE ()
+    SET(RINUTILS_INSTALL_MYLIBDIR "${CMAKE_INSTALL_LIBDIR}")
+ENDIF ()
 
 IF ("$ENV{FCS_CLANG}")
     ADD_DEFINITIONS("-Weverything -Wno-language-extension-token -Wno-gnu-statement-expression -Wno-used-but-marked-unused -Wno-padded -Wno-cast-align -Wno-extra-semi-stmt")
@@ -107,7 +115,7 @@ INSTALL(
     FILES
         "${CMAKE_CURRENT_BINARY_DIR}/lib${CPACK_PACKAGE_NAME}.pc"
     DESTINATION
-        "${CMAKE_INSTALL_LIBDIR}/pkgconfig"
+        "${RINUTILS_INSTALL_MYLIBDIR}/pkgconfig"
 )
 
 CONFIGURE_FILE(
@@ -132,7 +140,7 @@ ADD_CUSTOM_COMMAND(
 include(CMakePackageConfigHelpers)
 configure_package_config_file(RinutilsConfig.cmake.in
   ${CMAKE_CURRENT_BINARY_DIR}/RinutilsConfig.cmake
-  INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/Rinutils
+  INSTALL_DESTINATION ${RINUTILS_INSTALL_MYLIBDIR}/cmake/Rinutils
   PATH_VARS CMAKE_INSTALL_INCLUDEDIR)
 write_basic_package_version_file(
   ${CMAKE_CURRENT_BINARY_DIR}/RinutilsConfigVersion.cmake
@@ -140,7 +148,7 @@ write_basic_package_version_file(
   COMPATIBILITY SameMajorVersion )
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/RinutilsConfig.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/RinutilsConfigVersion.cmake
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/Rinutils )
+              DESTINATION ${RINUTILS_INSTALL_MYLIBDIR}/cmake/Rinutils )
 
 IF (WITH_TEST_SUITE)
 
