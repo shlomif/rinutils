@@ -1,0 +1,28 @@
+jobs:
+    test-fc-solve:
+        runs-on: ubuntu-latest
+        steps:
+        -   uses: actions/checkout@v2
+        -   run: sudo apt-get update -qq
+        -   run: sudo apt-get --no-install-recommends install -y eatmydata
+        -   run: sudo eatmydata apt-get --no-install-recommends install -y build-essential
+                cmake cmake-data cpanminus libcmocka-dev libperl-dev ninja-build perl
+                valgrind xz-utils zip
+        -   run: local_lib_shim() { eval "$(perl -Mlocal::lib=$HOME/perl_modules)";
+                } ; local_lib_shim ; cpanm local::lib
+        -   run: local_lib_shim() { eval "$(perl -Mlocal::lib=$HOME/perl_modules)";
+                } ; local_lib_shim ; eval "$(perl -Mlocal::lib=$HOME/perl_modules)"
+        -   run: local_lib_shim() { eval "$(perl -Mlocal::lib=$HOME/perl_modules)";
+                } ; local_lib_shim ; which python3
+        -   run: local_lib_shim() { eval "$(perl -Mlocal::lib=$HOME/perl_modules)";
+                } ; local_lib_shim ; cpanm --notest Code::TidyAll::Plugin::TestCount
+                Dir::Manifest Env::Path IO::All Inline Inline::C Perl::Critic Perl::Tidy
+                Test::Code::TidyAll Test::Differences Test::Pod Test::Pod::Coverage
+                Test::RunValgrind Test::TrailingSpace Test::Trap
+        -   run: local_lib_shim() { eval "$(perl -Mlocal::lib=$HOME/perl_modules)";
+                } ; local_lib_shim ; _verbose() { export HARNESS_VERBOSE=1 ; } ; export
+                FCS_TEST_BUILD=1 RINUTILS_TEST_TIDY=1 RINUTILS_TEST_BUILD=1 ; perl
+                CI-testing/continuous-integration-testing.pl
+name: use-github-actions
+'on':
+- push
