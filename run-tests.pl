@@ -35,6 +35,7 @@ sub _calc_prove
 }
 
 my $exit_success;
+my $RUN_TESTS_VERBOSE = ( $ENV{RUN_TESTS_VERBOSE} // "" );
 
 sub run_tests
 {
@@ -48,7 +49,7 @@ sub run_tests
             '-v', grep { /build-proc/ || /\.py\z/ } @$tests
         );
     }
-    if ( $ENV{RUN_TESTS_VERBOSE} )
+    if ($RUN_TESTS_VERBOSE)
     {
         print "Running [@cmd]\n";
     }
@@ -188,11 +189,14 @@ sub myglob
         @tests = grep { !/(?:cmpdigest|verify)--/ } @tests;
     }
 
-    print STDERR <<"EOF";
+    if ($RUN_TESTS_VERBOSE)
+    {
+        print STDERR <<"EOF";
 FCS_BIN_PATH = $ENV{FCS_BIN_PATH}
 FCS_SRC_PATH = $ENV{FCS_SRC_PATH}
 FCS_TEST_TAGS = <$ENV{FCS_TEST_TAGS}>
 EOF
+    }
 
     if ( $ENV{FCS_TEST_SHELL} )
     {
