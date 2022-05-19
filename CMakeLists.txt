@@ -3,6 +3,7 @@ PROJECT(rinutils)
 
 INCLUDE ("${CMAKE_SOURCE_DIR}/cmake/shlomif_common_bootstrap.cmake")
 SHLOMIF_COMMON_SETUP("${private_mod_path}")
+INCLUDE ("${CMAKE_SOURCE_DIR}/cmake/JoinPaths.cmake")
 
 CMAKE_POLICY(SET CMP0054 NEW)
 option (WITH_TEST_SUITE "Also build and run the test suite.")
@@ -117,6 +118,8 @@ INSTALL(
     DESTINATION
         "${RINUTILS_INSTALL_MYLIBDIR}/pkgconfig"
 )
+
+join_paths(includedir_for_pc_file "\${prefix}" "${CMAKE_INSTALL_INCLUDEDIR}")
 
 CONFIGURE_FILE(
     ${CMAKE_CURRENT_SOURCE_DIR}/${CPACK_PACKAGE_NAME}.spec.in
