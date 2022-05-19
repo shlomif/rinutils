@@ -1,8 +1,14 @@
 rinutils' News File
 ===================
 Shlomi Fish <shlomif@cpan.org>
-:Date: 2019-11-17
+:Date: 2022-05-19
 :Revision: $Id$
+
+0.10.1       ( 19 May 2022 )
+----------------------------
+
+* Add GitHub actions' CI.
+* Fix https://github.com/shlomif/rinutils/issues/5 ( "pkg-config file is broken when CMAKE_INSTALL_INCLUDEDIR is absolute")
 
 0.10.0       ( 06 Sep 2021 )
 ----------------------------
