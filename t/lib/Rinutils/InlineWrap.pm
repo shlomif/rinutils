@@ -8,7 +8,7 @@ use Config;
 use Inline;
 
 use Rinutils::Paths::Base qw( is_win );
-use Rinutils::Paths qw( bin_file src_file );
+use Rinutils::Paths       qw( bin_file src_file );
 
 sub import
 {

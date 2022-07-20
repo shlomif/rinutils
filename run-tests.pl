@@ -5,9 +5,9 @@ use strict;
 use warnings;
 use autodie;
 
-use Getopt::Long qw/ GetOptions /;
-use Env::Path ();
-use Path::Tiny qw/ path /;
+use Getopt::Long   qw/ GetOptions /;
+use Env::Path      ();
+use Path::Tiny     qw/ path /;
 use File::Basename qw/ basename /;
 
 my $glob_was_set = 0;
