@@ -13,7 +13,9 @@ are expected to work on https://en.wikipedia.org/wiki/Unix-like[Unix-like system
 and https://en.wikipedia.org/wiki/Microsoft_Windows[MS Windows] that have
 been extracted from https://www.shlomifish.org/[Shlomi Fish´s projects].
 
-They include:
+Note that we publish realeses source tarballs: https://github.com/shlomif/rinutils/tags .
+
+These headers include:
 
 . sizeof-aware wrappers for https://en.cppreference.com/w/c/memory/malloc[malloc()/realloc()]
 
