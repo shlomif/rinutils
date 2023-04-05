@@ -13,7 +13,7 @@ foreach my $path ( @ENV{qw/FCS_SRC_PATH FCS_BIN_PATH/} )
             root              => $path,
             filename_regex    => qr/./,
             abs_path_prune_re => qr#CMakeFiles|CTestTestfile\.cmake|_Inline|
-(?:\.(?:a|dll|exe|gz|o|patch|pyc|xcf|xz)\z) |
+(?:\.(?:a|dll|exe|gz|ninja|o|patch|pyc|xcf|xz)\z) |
 (?:(?:\A|/|\\)\.\S+\.swp\z) |
 (?:(?:\A|/|\\)valgrind\S*\.log\z) |
 (?:(?:\A|/|\\)DartConfiguration\.tcl\z)
