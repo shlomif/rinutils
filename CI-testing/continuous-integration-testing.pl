@@ -7,6 +7,8 @@ use autodie;
 
 use Getopt::Long qw/ GetOptions /;
 
+use Path::Tiny qw/ path tempdir tempfile cwd /;
+
 sub do_system
 {
     my ($args) = @_;
@@ -41,12 +43,14 @@ if ($IS_WIN)
     ( $ENV{PKG_CONFIG_PATH} //= '' ) .=
         ";/foo/lib/pkgconfig/;/c/foo/lib/pkgconfig/";
 }
+
+my $cwd = cwd();
 do_system(
     {
         cmd => [
-                  "cd . && mkdir B && cd B && cmake -DWITH_TEST_SUITE=ON .. "
+"cd . && mkdir ..${SEP}B && cd ..${SEP}B && cmake -DWITH_TEST_SUITE=ON \"$cwd\" "
                 . ( defined($cmake_gen) ? qq#-G "$cmake_gen"# : "" )
-                . " && $MAKE && $^X ..${SEP}run-tests.pl"
+                . " && $MAKE && $^X \"$cwd${SEP}run-tests.pl\""
         ]
     }
 );

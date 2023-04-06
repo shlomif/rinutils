@@ -27,10 +27,12 @@ sub _build_cache_value
 }
 
 package main;
+
 require Test::Code::TidyAll;
 
 my $KEY = 'TIDYALL_DATA_DIR';
 Test::Code::TidyAll::tidyall_ok(
     cache_model_class => 'MyCacheModel',
+    conf_file         => "$ENV{FCS_SRC_PATH}/.tidyallrc",
     ( exists( $ENV{$KEY} ) ? ( data_dir => $ENV{$KEY} ) : () )
 );
