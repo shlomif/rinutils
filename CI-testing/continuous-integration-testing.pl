@@ -7,7 +7,7 @@ use autodie;
 
 use Getopt::Long qw/ GetOptions /;
 
-use Path::Tiny qw/ path tempdir tempfile cwd /;
+use Path::Tiny qw/ cwd path tempdir tempfile /;
 
 sub do_system
 {
@@ -44,11 +44,13 @@ if ($IS_WIN)
         ";/foo/lib/pkgconfig/;/c/foo/lib/pkgconfig/";
 }
 
-my $cwd = cwd();
+my $cwd           = cwd();
+my $build_dirname = "..${SEP}B";
+path($build_dirname)->remove_tree();
 do_system(
     {
         cmd => [
-"cd . && mkdir ..${SEP}B && cd ..${SEP}B && cmake -DWITH_TEST_SUITE=ON \"$cwd\" "
+"cd . && mkdir $build_dirname && cd $build_dirname && cmake -DWITH_TEST_SUITE=ON \"$cwd\" "
                 . ( defined($cmake_gen) ? qq#-G "$cmake_gen"# : "" )
                 . " && $MAKE && $^X \"$cwd${SEP}run-tests.pl\""
         ]
