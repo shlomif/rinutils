@@ -23,8 +23,7 @@ import yaml
 
 
 def _add_condition_while_excluding_gh_actions(job_dict, is_act):
-    """
-    See:
+    """See:
 
     https://github.com/actions/runner/issues/480
 
