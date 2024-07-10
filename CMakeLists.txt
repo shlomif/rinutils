@@ -119,7 +119,10 @@ INSTALL(
         "${RINUTILS_INSTALL_MYLIBDIR}/pkgconfig"
 )
 
+# https://github.com/shlomif/rinutils/issues/5 ( "pkg-config file is broken when CMAKE_INSTALL_INCLUDEDIR is absolute")
+# or libdir)
 join_paths(includedir_for_pc_file "\${prefix}" "${CMAKE_INSTALL_INCLUDEDIR}")
+join_paths(libdir_for_pc_file "\${exec_prefix}" "${CMAKE_INSTALL_LIBDIR}")
 
 CONFIGURE_FILE(
     ${CMAKE_CURRENT_SOURCE_DIR}/${CPACK_PACKAGE_NAME}.spec.in
